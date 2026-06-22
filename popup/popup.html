@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* --- BASE LAYOUT --- */
+    body {
+      width: 320px;
+      padding: 10px;
+      background: #121212;
+      color: #eeeeee;
+      font-family: 'Terminal', 'Fixedsys', 'Consolas', 'Courier New', monospace;
+      margin: 0;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    
+    /* --- HEADER --- */
+    .header {
+      color: #db2777; 
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
+    }
+    
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .version { 
+      font-size: 9px; 
+      color: #666666; 
+      font-weight: bold; 
+    }
+    
+    /* --- CONTROLS BOX --- */
+    .control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      background: #1a1a1a;
+      padding: 6px 10px;
+    }
+    
+    .label { 
+      font-size: 11px; 
+      font-weight: bold; 
+      color: #cccccc; 
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    
+    /* --- TOGGLE SWITCH --- */
+    .switch { 
+      position: relative; 
+      display: inline-block; 
+      width: 32px; 
+      height: 16px; 
+    }
+    .switch input { 
+      opacity: 0; 
+      width: 0; 
+      height: 0; 
+    }
+    .slider { 
+      position: absolute; 
+      cursor: pointer; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      bottom: 0; 
+      background-color: #2b2b2b; 
+      transition: .2s; 
+    }
+    .slider:before { 
+      position: absolute; 
+      content: ""; 
+      height: 10px; 
+      width: 10px; 
+      left: 3px; 
+      bottom: 3px; 
+      background-color: #888888; 
+      transition: .2s; 
+    }
+    input:checked + .slider { 
+      background-color: #1a1a1a; 
+    }
+    input:checked + .slider:before { 
+      transform: translateX(16px); 
+      background-color: #db2777;
+    }
+
+    /* --- ACTION BUTTONS --- */
+    .action-row {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .btn-action {
+      flex: 1;
+      background: #1a1a1a;
+      color: #888888;
+      border: none;
+      outline: none;
+      padding: 6px 4px;
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.15s ease-in-out;
+      text-transform: uppercase;
+      font-family: inherit;
+    }
+
+    .btn-reload:hover { 
+      background: #2b2b2b; 
+      color: #3b82f6; 
+    }
+    
+    .btn-cookies:hover {
+      background: #db2777;
+      color: white;
+    }
+
+    .btn-clear:hover { 
+      background: #2b2b2b; 
+      color: #ef4444; 
+    }
+
+    /* --- LIST CONTAINER --- */
+    #m3u8-container {
+      margin-top: 10px;
+      padding-top: 10px;
+      display: none; 
+    }
+    
+    .section-title {
+      font-size: 10px;
+      color: #db2777;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      padding-left: 6px;
+      margin-bottom: 8px;
+    }
+    
+    #m3u8-list {
+      max-height: 230px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+    
+    /* Custom Scrollbar */
+    #m3u8-list::-webkit-scrollbar {
+      width: 4px;
+    }
+    #m3u8-list::-webkit-scrollbar-track {
+      background: #121212;
+    }
+    #m3u8-list::-webkit-scrollbar-thumb {
+      background: #2b2b2b;
+    }
+    #m3u8-list::-webkit-scrollbar-thumb:hover {
+      background: #db2777;
+    }
+
+    /* --- LIST ITEM --- */
+    .m3u8-item {
+      background: #1c1c1c;
+      padding: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+      display: flex;
+      flex-direction: column; 
+      gap: 4px;
+    }
+    .m3u8-item:hover {
+      background: #222222;
+    }
+    
+    .item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    
+    .item-info-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .m3u8-title {
+      font-size: 11px;
+      font-weight: bold;
+      color: #eeeeee;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .item-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .m3u8-url {
+      font-size: 9px;
+      color: #666666;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: inherit;
+      flex: 1;
+    }
+    
+    /* --- TAGS --- */
+    .m3u8-tag, .mp4-tag {
+      color: white;
+      padding: 1px 4px;
+      font-size: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .m3u8-tag { background: #db2777; }
+    .mp4-tag { background: #3b82f6; }
+    
+    .quality-tag {
+      font-size: 8px;
+      background: #1a1a1a;
+      padding: 1px 4px;
+      color: #fbbf24;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+    
+    .media-cat-tag {
+      font-size: 8px;
+      color: #888888;
+      font-weight: bold;
+      background: #1a1a1a;
+      padding: 1px 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* --- STATUS MESSAGE --- */
+    #status-msg {
+      font-size: 10px;
+      color: #00ff00;
+      background: #1a1a1a;
+      padding: 6px 8px;
+      margin-top: 8px;
+      min-height: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    #status-msg::before {
+      content: "> ";
+      color: #db2777;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-area">
+      <span>xidown ext</span>
+    </div>
+    <span class="version">v1.2</span>
+  </div>
+  
+  <div class="control">
+    <span class="label">Video Detector</span>
+    <label class="switch">
+      <input type="checkbox" id="toggle-btn">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="action-row">
+    <button id="btn-reload" class="btn-action btn-reload">Reload</button>
+    <button id="btn-cookies" class="btn-action btn-cookies">Cookies</button>
+    <button id="btn-clear" class="btn-action btn-clear">Clear</button>
+  </div>
+  
+  <div id="m3u8-container">
+    <div class="section-title">Detected Media</div>
+    <div id="m3u8-list"></div>
+  </div>
+  
+  <div id="status-msg">Ready.</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
