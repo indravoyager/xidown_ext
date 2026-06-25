@@ -20,7 +20,7 @@
       color: #db2777; 
       font-weight: bold;
       font-size: 14px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       padding-bottom: 8px;
       display: flex;
       justify-content: space-between;
@@ -45,15 +45,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
-      background: #1a1a1a;
+      margin-bottom: 5px;
+      background: #222222;
       padding: 6px 10px;
     }
     
     .label { 
       font-size: 11px; 
       font-weight: bold; 
-      color: #cccccc; 
+      color: #ffffff; 
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
@@ -62,8 +62,8 @@
     .switch { 
       position: relative; 
       display: inline-block; 
-      width: 32px; 
-      height: 16px; 
+      width: 34px; 
+      height: 18px; 
     }
     .switch input { 
       opacity: 0; 
@@ -77,7 +77,8 @@
       left: 0; 
       right: 0; 
       bottom: 0; 
-      background-color: #2b2b2b; 
+      background-color: #121212; 
+      border: 1px solid #444444;
       transition: .2s; 
     }
     .slider:before { 
@@ -87,11 +88,12 @@
       width: 10px; 
       left: 3px; 
       bottom: 3px; 
-      background-color: #888888; 
+      background-color: #555555; 
       transition: .2s; 
     }
     input:checked + .slider { 
-      background-color: #1a1a1a; 
+      border-color: #db2777;
+      background-color: #1e1017;
     }
     input:checked + .slider:before { 
       transform: translateX(16px); 
@@ -102,12 +104,12 @@
     .action-row {
       display: flex;
       gap: 5px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     
     .btn-action {
       flex: 1;
-      background: #1a1a1a;
+      background: #222222;
       color: #888888;
       border: none;
       outline: none;
@@ -121,7 +123,7 @@
     }
 
     .btn-reload:hover { 
-      background: #2b2b2b; 
+      background: #2e2e2e; 
       color: #3b82f6; 
     }
     
@@ -131,14 +133,15 @@
     }
 
     .btn-clear:hover { 
-      background: #2b2b2b; 
+      background: #2e2e2e; 
       color: #ef4444; 
     }
 
     /* --- LIST CONTAINER --- */
     #m3u8-container {
-      margin-top: 10px;
-      padding-top: 10px;
+      margin-top: 0;
+      padding-top: 5px;
+      margin-bottom: 5px;
       display: none; 
     }
     
@@ -174,7 +177,7 @@
 
     /* --- LIST ITEM --- */
     .m3u8-item {
-      background: #1c1c1c;
+      background: #2a2a2a;
       padding: 8px;
       margin-bottom: 6px;
       cursor: pointer;
@@ -184,7 +187,7 @@
       gap: 4px;
     }
     .m3u8-item:hover {
-      background: #222222;
+      background: #333333;
     }
     
     .item-top {
@@ -243,7 +246,7 @@
     
     .quality-tag {
       font-size: 8px;
-      background: #1a1a1a;
+      background: #222222;
       padding: 1px 4px;
       color: #fbbf24;
       white-space: nowrap;
@@ -254,7 +257,7 @@
       font-size: 8px;
       color: #888888;
       font-weight: bold;
-      background: #1a1a1a;
+      background: #222222;
       padding: 1px 4px;
       text-transform: uppercase;
       white-space: nowrap;
@@ -264,9 +267,9 @@
     #status-msg {
       font-size: 10px;
       color: #00ff00;
-      background: #1a1a1a;
+      background: #222222;
       padding: 6px 8px;
-      margin-top: 8px;
+      margin-top: 0;
       min-height: 14px;
       font-weight: bold;
       text-transform: uppercase;
@@ -283,7 +286,7 @@
     <div class="logo-area">
       <span>xidown ext</span>
     </div>
-    <span class="version">v1.2</span>
+    <span class="version">v1.3</span>
   </div>
   
   <div class="control">

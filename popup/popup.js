@@ -16,7 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const status = toggle.checked;
     chrome.storage.local.set({ xidownEnabled: status });
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-      if (tabs[0]) chrome.tabs.sendMessage(tabs[0].id, { action: "toggle_status", status: status });
+      if (tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "toggle_status", status: status }, () => {
+          // Catch and ignore the error if content script is not injected on the page (e.g., chrome:// pages)
+          if (chrome.runtime.lastError) {
+            // Silently ignore to keep console clean
+          }
+        });
+      }
     });
   });
 
