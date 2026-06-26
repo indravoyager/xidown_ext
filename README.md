@@ -1,6 +1,6 @@
-# Xidown Ext
+# xidown ext
 
-Companion browser extension for the **Xidown** desktop media downloader.
+Browser companion for the **xidown** video and audio downloader, featuring automatic media stream detection and cookie synchronization.
 
 ---
 
@@ -16,22 +16,22 @@ Companion browser extension for the **Xidown** desktop media downloader.
 
 - **Smart Media Sniffer:** Detects and intercepts `.m3u8` and `.mp4` streams. Excludes junk/ad URLs, automatically parses resolutions (e.g., `1080p`), and categorizes streams (`VIDEO+AUDIO`, `VIDEO ONLY`, `AUDIO ONLY`).
 - **Header & Cookie Cloner:** Automatically clones critical request headers (Cookies, User-Agent, Referer, Origin) to bypass restrictions and age-gates.
-- **One-Click Cookie Sync:** Instantly extracts and formats page cookies into a Netscape HTTP cookie file, syncing it with the local Xidown server.
+- **One-Click Cookie Sync:** Instantly extracts and formats page cookies into a Netscape HTTP cookie file, syncing it with the local xidown server.
 - **Seamless Local Integration:** Sends media URLs, cloned headers, and sanitized titles directly to the local downloader at `http://localhost:3000/download`.
 - **Brutalist Terminal UI:** A compact, high-contrast dark theme featuring a global sniffing toggle, real-time status feedback, and quick actions (reload/clear).
 
 ---
 
-## Main Downloader Application (Xidown)
+## Main Downloader Application (xidown)
 
 > [!IMPORTANT]
-> This extension requires the main **Xidown** desktop application to be running locally on your machine (`http://localhost:3000`) in order to capture and process streams.
+> This extension requires the main **xidown** desktop application to be running locally on your machine (`http://localhost:3000`) in order to capture and process streams.
 
 - **Main Repository:** [github.com/indravoyager/xidown](https://github.com/indravoyager/xidown)
-- **Standalone Downloads:** [Xidown Releases Page](https://github.com/indravoyager/xidown/releases) (Pre-compiled for Windows, macOS, and Linux)
+- **Standalone Downloads:** [xidown Releases Page](https://github.com/indravoyager/xidown/releases) (Pre-compiled for Windows, macOS, and Linux)
 
 ### Quick Setup for the Main App:
-1. **Download:** Go to the [Releases](https://github.com/indravoyager/xidown/releases) page and grab the `.zip` archive for your OS.
+1. **Download:** Go to the [xidown Releases](https://github.com/indravoyager/xidown/releases) page and grab the `.zip` archive for your OS.
 2. **Launch:**
    - **Windows:** Extract and run `xidown.exe` (automatically creates a desktop shortcut on the first launch!).
    - **macOS:** Extract and double-click `xidown.app`.
@@ -83,8 +83,8 @@ xidown_ext/
 
 1. **Sniffing:** When you visit a website containing videos, `background.js` intercepts network traffic and looks for `.m3u8` and `.mp4` files.
 2. **Notification:** Once a media file is detected, the extension icon badge updates with a `!` notification.
-3. **Download:** Open the extension popup, check the detected media list (sorted by quality), and click any item. It will send the stream URL along with all required referer/cookie headers to your local Xidown desktop application at `http://localhost:3000/download`.
-4. **Cookie Sync:** If a video requires authentication, click the **Cookies** button to sync the Netscape Cookie file to your local Xidown app for download authentication.
+3. **Download:** Open the extension popup, check the detected media list (sorted by quality), and click any item. It will send the stream URL along with all required referer/cookie headers to your local xidown desktop application at `http://localhost:3000/download`.
+4. **Cookie Sync:** If a video requires authentication, click the **Cookies** button to sync the Netscape Cookie file to your local xidown app for download authentication.
 
 ---
 
