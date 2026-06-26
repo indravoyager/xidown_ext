@@ -1,27 +1,46 @@
 # Xidown Ext
 
-Xidown Ext is a powerful, minimal, and brutalist Chrome Extension designed for media stream detection, advanced request header sniffing, cookie synchronisation, and direct integration with the local Xidown downloader application. It features a space-saving terminal aesthetic with sharp, 90-degree corners, monospace fonts, and vibrant pink highlights.
+Companion browser extension for the **Xidown** desktop media downloader.
+
+---
 
 ## Preview
 
 | Extension Popup (Terminal Interface) | Floating DL Button |
 | :---: | :---: |
-| ![Extension Popup](assets/xidown_popup.png) | ![Floating DL Button](assets/xidown_overlay.png) |
+| ![Extension Popup](assets/xidown_popupv1.3.png) | ![Floating DL Button](assets/xidown_overlay.png) |
+
+---
 
 ## Features
 
-- **Flat & Brutalist Terminal Design:** Clean, space-saving UI with sharp 90-degree corners, monospace fonts, and high-contrast status colors.
-- **Smart Media Detector:**
-  - Automatically captures `.m3u8` playlists and `.mp4` video files.
-  - Excludes junk/noise URLs (ads, doubleclick, analytics, pixels).
-  - Shows dynamic badge counts and colors on the extension icon depending on file types (MP4 vs M3U8).
-- **Advanced Header Sniffing:** Clones critical request headers (including Cookies, User-Agent, Referer, Origin, Authorization, and Accept-Language) for seamless authenticated downloads.
-- **Direct Local App Integration:** Send download links, cookies, and header packages directly to the local Xidown server (`http://localhost:3000/download`) with visual status feedback.
-- **Cookie Export & Sync:** Send page-specific cookies formatted as a Netscape HTTP Cookie File to the local server for authenticated stream fetching.
-- **Resolution Detection & Quality Filtering:** Parses URLs to extract and display resolution tags (e.g., `1080p`, `720p`), categorizes media type (`VIDEO + AUDIO`, `AUDIO ONLY`, `VIDEO ONLY`), and automatically sorts results by quality.
-- **Smart Filename Sanitisation:** Standardises file titles by stripping notification numbers (e.g. `(1)`), website suffixes (`YouTube`, `PikPak`, `Facebook`, `Bilibili`), and unsafe operating system filename characters.
+- **Smart Media Sniffer:** Detects and intercepts `.m3u8` and `.mp4` streams. Excludes junk/ad URLs, automatically parses resolutions (e.g., `1080p`), and categorizes streams (`VIDEO+AUDIO`, `VIDEO ONLY`, `AUDIO ONLY`).
+- **Header & Cookie Cloner:** Automatically clones critical request headers (Cookies, User-Agent, Referer, Origin) to bypass restrictions and age-gates.
+- **One-Click Cookie Sync:** Instantly extracts and formats page cookies into a Netscape HTTP cookie file, syncing it with the local Xidown server.
+- **Seamless Local Integration:** Sends media URLs, cloned headers, and sanitized titles directly to the local downloader at `http://localhost:3000/download`.
+- **Brutalist Terminal UI:** A compact, high-contrast dark theme featuring a global sniffing toggle, real-time status feedback, and quick actions (reload/clear).
 
-## Installation & Setup
+---
+
+## Main Downloader Application (Xidown)
+
+> [!IMPORTANT]
+> This extension requires the main **Xidown** desktop application to be running locally on your machine (`http://localhost:3000`) in order to capture and process streams.
+
+- **Main Repository:** [github.com/indravoyager/xidown](https://github.com/indravoyager/xidown)
+- **Standalone Downloads:** [Xidown Releases Page](https://github.com/indravoyager/xidown/releases) (Pre-compiled for Windows, macOS, and Linux)
+
+### Quick Setup for the Main App:
+1. **Download:** Go to the [Releases](https://github.com/indravoyager/xidown/releases) page and grab the `.zip` archive for your OS.
+2. **Launch:**
+   - **Windows:** Extract and run `xidown.exe` (automatically creates a desktop shortcut on the first launch!).
+   - **macOS:** Extract and double-click `xidown.app`.
+   - **Linux:** Extract, make executable (`chmod +x xidown`), and run `./xidown`.
+3. **Developer Mode (Run from Source):** Clone the main repository, create a python virtual environment, and run `pip install -e .` followed by the `xidown` command.
+
+---
+
+## Installation & Setup (Extension)
 
 1. Clone or download this repository to your local system:
    ```bash
@@ -35,13 +54,15 @@ Xidown Ext is a powerful, minimal, and brutalist Chrome Extension designed for m
 4. Click **Load unpacked** in the top-left corner.
 5. Select the `xidown_ext` directory (containing `manifest.json`).
 
+---
+
 ## Project Structure
 
 ```text
 xidown_ext/
 ├── assets/
 │   ├── xidown_overlay.png # Floating DL button preview
-│   └── xidown_popup.png   # Extension preview screenshot
+│   └── xidown_popupv1.3.png # Extension preview screenshot
 ├── img/
 │   └── icon.png           # Extension icon assets
 ├── popup/
@@ -56,6 +77,8 @@ xidown_ext/
 └── README.md              # Documentation and usage guide
 ```
 
+---
+
 ## How It Works
 
 1. **Sniffing:** When you visit a website containing videos, `background.js` intercepts network traffic and looks for `.m3u8` and `.mp4` files.
@@ -63,9 +86,13 @@ xidown_ext/
 3. **Download:** Open the extension popup, check the detected media list (sorted by quality), and click any item. It will send the stream URL along with all required referer/cookie headers to your local Xidown desktop application at `http://localhost:3000/download`.
 4. **Cookie Sync:** If a video requires authentication, click the **Cookies** button to sync the Netscape Cookie file to your local Xidown app for download authentication.
 
+---
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+---
 
 ## License
 
